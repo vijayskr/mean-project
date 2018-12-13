@@ -1,0 +1,76 @@
+<div class="container">
+  <div class="col-lg-10 col-sm-4">
+      <h2>Apply Leave</h2>
+      <hr>
+    <form #applyLeaveForm="ngForm" (ngSubmit)="applyLeave(leave)">
+      
+      <div class="form-group row" [class.has-error]="startDate.invalid && startDate.touched" [class.has-success]="startDate.valid">
+        <label for="startDate" class="col-sm-2 col-form-label">Start Date</label>
+        <div class="col-sm-10">
+          <input type="text" [(ngModel)]="leave.startDate" #startDate="ngModel" required name="startDate" class="form-control"
+            placeholder=" dd/mm/yyyy " pattern="\d{1,2}/\d{1,2}/\d{4}">
+          <div class="alert alert-danger" *ngIf="startDate.errors?.required && startDate.touched">
+            Start date is required
+          </div>
+          <div class="alert alert-danger" *ngIf="startDate.errors?.pattern && startDate.touched">
+            Please enter a valid date
+          </div>
+        </div>
+
+      </div>
+      <div class="form-group row" [class.has-error]="endDate.invalid && endDate.touched" [class.has-success]="endDate.valid">
+        <label for="endDate" class="col-sm-2 col-form-label">End Date</label>
+        <div class="col-sm-10">
+          <input type="text" [(ngModel)]="leave.endDate" #endDate="ngModel" required name="endDate" class="form-control"
+            placeholder=" dd/mm/yyyy " pattern="\d{1,2}/\d{1,2}/\d{4}">
+          <div class="alert alert-danger" *ngIf="endDate.errors?.required && endDate.touched">
+            End date is required
+          </div>
+          <div class="alert alert-danger" *ngIf="endDate.errors?.pattern && endDate.touched">
+            Please enter a valid date
+          </div>
+        </div>
+
+      </div>
+      <div class="form-group row" [class.has-error]="days.invalid && days.touched" [class.has-success]="days.valid">
+        <label for="days" class="col-sm-2 col-form-label">Number of days</label>
+        <div class="col-sm-10">
+          <input type="text" [(ngModel)]="leave.days" #days="ngModel" required name="days" class="form-control"
+            placeholder="" pattern="\d*">
+          <div class="alert alert-danger" *ngIf="days.errors?.required && days.touched">
+            Days is required
+          </div>
+          <div class="alert alert-danger" *ngIf="days.errors?.pattern && days.touched">
+              Please enter a number
+            </div>
+        </div>
+
+      </div>
+      <div class="form-group row">
+        <label for="leaveType" class="col-sm-2 col-form-label">Leave Type</label>
+        <div class="col-sm-10">
+          <select class="custom-select form-control" name="leaveType"
+            (change)="onLeaveChange()">
+            <option value="0" selected='true'>Earned Leave</option>
+          </select>
+        </div>
+
+      </div>
+      <div class="form-group row" [class.has-error]="reason.invalid && reason.touched" [class.has-success]="reason.valid">
+        <label for="reason" class="col-sm-2 col-form-label">Leave Reason</label>
+        <div class="col-sm-10">
+          <textarea type="text" class="form-control" name="reason" #reason="ngModel" [(ngModel)]="leave.reason"
+            aria-describedby="reason" required placeholder="Leave Reason"></textarea>
+          <div class="alert alert-danger" *ngIf="reason.errors?.required && reason.touched">
+            Reason is required
+          </div>
+        </div>
+
+      </div>
+      <div class="row">
+        <button class="btn btn-secondary mr5px" type="button">Cancel</button>
+        <button class="btn btn-primary" type="submit" [disabled]="applyLeaveForm.invalid">Apply</button>
+      </div>
+    </form>
+  </div>
+</div>
