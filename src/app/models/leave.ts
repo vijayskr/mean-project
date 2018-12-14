@@ -4,5 +4,5 @@ export class Leave {
     endDate: string;
     days: number;
     leaveType: string;
-    reason: string;
+    leaveReason: string;
 }

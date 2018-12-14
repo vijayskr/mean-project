@@ -49,20 +49,20 @@
       <div class="form-group row">
         <label for="leaveType" class="col-sm-2 col-form-label">Leave Type</label>
         <div class="col-sm-10">
-          <select class="custom-select form-control" name="leaveType"
+          <select class="custom-select form-control" name="leaveType" #leaveType="ngModel" [(ngModel)]="leave.leaveType"
             (change)="onLeaveChange()">
             <option value="0" selected='true'>Earned Leave</option>
           </select>
         </div>
 
       </div>
-      <div class="form-group row" [class.has-error]="reason.invalid && reason.touched" [class.has-success]="reason.valid">
-        <label for="reason" class="col-sm-2 col-form-label">Leave Reason</label>
+      <div class="form-group row" [class.has-error]="leaveReason.invalid && leaveReason.touched" [class.has-success]="leaveReason.valid">
+        <label for="leaveReason" class="col-sm-2 col-form-label">Leave Reason</label>
         <div class="col-sm-10">
-          <textarea type="text" class="form-control" name="reason" #reason="ngModel" [(ngModel)]="leave.reason"
-            aria-describedby="reason" required placeholder="Leave Reason"></textarea>
-          <div class="alert alert-danger" *ngIf="reason.errors?.required && reason.touched">
-            Reason is required
+          <textarea type="text" class="form-control" name="leaveReason" #leaveReason="ngModel" [(ngModel)]="leave.leaveReason"
+            aria-describedby="leaveReason" required placeholder="Leave Reason"></textarea>
+          <div class="alert alert-danger" *ngIf="leaveReason.errors?.required && leaveReason.touched">
+            Leave reason is required
           </div>
         </div>
 
