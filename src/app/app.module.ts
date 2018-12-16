@@ -16,6 +16,7 @@ import { MatNativeDateModule } from '@angular/material';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material';
 import { DateValidatorDirective } from './directives/date.validator.directive';
+import { ViewLeaveComponent } from './leave/view-leave/view-leave.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { DateValidatorDirective } from './directives/date.validator.directive';
     LoginComponent,
     DashboardComponent,
     ApplyLeaveComponent,
-    DateValidatorDirective
+    DateValidatorDirective,
+    ViewLeaveComponent
   ],
   imports: [
     FormsModule,

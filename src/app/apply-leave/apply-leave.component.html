@@ -49,7 +49,7 @@
       </div>
       <div class="form-group row" [class.has-error]="days.invalid && days.touched" [class.has-success]="days.valid">
         <label for="days" class="col-sm-2 col-form-label">Number of days</label>
-        <div class="col-sm-10">
+        <div class="col-sm-10 col-lg-3">
           <input type="text" [(ngModel)]="leave.days" #days="ngModel" required name="days" class="form-control"
             placeholder="" pattern="\d*" maxlength="2">
           <div class="alert alert-danger" *ngIf="days.errors?.required && days.touched">
@@ -63,7 +63,7 @@
       </div>
       <div class="form-group row">
         <label for="leaveType" class="col-sm-2 col-form-label">Leave Type</label>
-        <div class="col-sm-10">
+        <div class="col-sm-10  col-lg-3">
           <select class="custom-select form-control" name="leaveType" #leaveType="ngModel" [(ngModel)]="leave.leaveType">
             <option value="0" selected='true'>Earned Leave</option>
           </select>
@@ -72,7 +72,7 @@
       </div>
       <div class="form-group row" [class.has-error]="leaveReason.invalid && leaveReason.touched" [class.has-success]="leaveReason.valid">
         <label for="leaveReason" class="col-sm-2 col-form-label">Leave Reason</label>
-        <div class="col-sm-10">
+        <div class="col-sm-10  col-lg-4">
           <textarea type="text" class="form-control" name="leaveReason" #leaveReason="ngModel" [(ngModel)]="leave.leaveReason"
             aria-describedby="leaveReason" required placeholder="Leave Reason"></textarea>
           <div class="alert alert-danger" *ngIf="leaveReason.errors?.required && leaveReason.touched">

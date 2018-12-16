@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Leave } from '../models/leave';
+import { EmployeeLeave } from '../models/leave';
 import { Observable } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
 
@@ -48,10 +48,17 @@ export class LeaveService {
   //       catchError(err => this.handleError(err, user))
   //     );
   // }
-  applyLeave(leave: Leave): Observable<any> {
+  applyLeave(leave: EmployeeLeave): Observable<any> {
     return this.http.post<any>(this.url + '/applyLeave', leave, httpOptions)
       .pipe(
         catchError(err => this.handleError(err, leave))
+      );
+  }
+
+  viewLeave(id: String): Observable<any> {
+    return this.http.get<any>(this.url + '/viewLeave')
+      .pipe(
+        catchError(err => this.handleError(err, id))
       );
   }
 

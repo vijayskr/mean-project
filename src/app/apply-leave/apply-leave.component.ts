@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Leave } from '../models/leave';
+import { EmployeeLeave } from '../models/leave';
 import { LeaveService } from '../services/leave.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'apply-leave',
@@ -8,9 +9,9 @@ import { LeaveService } from '../services/leave.service';
   styleUrls: ['./apply-leave.component.css']
 })
 export class ApplyLeaveComponent implements OnInit {
-  leave: Leave = new Leave();
+  leave: EmployeeLeave = new EmployeeLeave();
 
-  constructor(private leaveSvc: LeaveService) { }
+  constructor(private leaveSvc: LeaveService, private router: Router) { }
 
   ngOnInit() {
   }
@@ -46,9 +47,10 @@ export class ApplyLeaveComponent implements OnInit {
 
   }
   //Apply Leave
-  applyLeave = (leave: Leave) => {
+  applyLeave = (leave: EmployeeLeave) => {
     this.leaveSvc.applyLeave(leave).subscribe(res => {
       console.log(res);
+      this.router.navigateByUrl('/viewLeave');
     }, err => {
       console.log(err);
     });
