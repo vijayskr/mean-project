@@ -1,28 +1,43 @@
 <div class="container">
   <div class="col-lg-10 col-sm-4">
-      <h2>Apply Leave</h2>
-      <hr>
+    <h2>Apply Leave</h2>
+    <hr>
     <form #applyLeaveForm="ngForm" (ngSubmit)="applyLeave(leave)">
-      
+
       <div class="form-group row" [class.has-error]="startDate.invalid && startDate.touched" [class.has-success]="startDate.valid">
         <label for="startDate" class="col-sm-2 col-form-label">Start Date</label>
         <div class="col-sm-10">
-          <input type="text" [(ngModel)]="leave.startDate" #startDate="ngModel" required name="startDate" class="form-control"
-            placeholder=" dd/mm/yyyy " pattern="\d{1,2}/\d{1,2}/\d{4}">
+          <!-- <input type="text" (ngModelChange)="onStartDateChanged($event)" [ngModel]="leave.startDate" #startDate="ngModel" required name="startDate" class="form-control"
+            placeholder=" dd/mm/yyyy " > -->
+          <mat-form-field>
+            <input readonly validateDateFormat matInput [matDatepicker]="startDatepicker" placeholder="DD/MM/YYYY" (ngModelChange)="onStartDateChanged($event)"
+              [ngModel]="leave.startDate" #startDate="ngModel" required name="startDate">
+            <mat-datepicker-toggle matSuffix [for]="startDatepicker"></mat-datepicker-toggle>
+            <mat-datepicker #startDatepicker></mat-datepicker>
+          </mat-form-field>
           <div class="alert alert-danger" *ngIf="startDate.errors?.required && startDate.touched">
             Start date is required
           </div>
           <div class="alert alert-danger" *ngIf="startDate.errors?.pattern && startDate.touched">
             Please enter a valid date
           </div>
+          <div class="alert alert-danger" *ngIf="startDate.errors?.startDateInvalid && startDate.touched">
+              Start date cannot't be past/today's date!
+            </div>
         </div>
 
       </div>
       <div class="form-group row" [class.has-error]="endDate.invalid && endDate.touched" [class.has-success]="endDate.valid">
         <label for="endDate" class="col-sm-2 col-form-label">End Date</label>
         <div class="col-sm-10">
-          <input type="text" [(ngModel)]="leave.endDate" #endDate="ngModel" required name="endDate" class="form-control"
-            placeholder=" dd/mm/yyyy " pattern="\d{1,2}/\d{1,2}/\d{4}">
+          <!-- <input type="text" (ngModelChange)="onEndDateChanged($event)" [ngModel]="leave.endDate" #endDate="ngModel" required name="endDate" class="form-control"
+            placeholder=" dd/mm/yyyy " pattern="\d{1,2}/\d{1,2}/\d{4}"> -->
+          <mat-form-field>
+            <input readonly matInput [matDatepicker]="endDatepicker" placeholder="DD/MM/YYYY" (ngModelChange)="onEndDateChanged($event)"
+              [ngModel]="leave.endDate" #endDate="ngModel" required name="endDate">
+            <mat-datepicker-toggle matSuffix [for]="endDatepicker"></mat-datepicker-toggle>
+            <mat-datepicker #endDatepicker></mat-datepicker>
+          </mat-form-field>
           <div class="alert alert-danger" *ngIf="endDate.errors?.required && endDate.touched">
             End date is required
           </div>
@@ -36,21 +51,20 @@
         <label for="days" class="col-sm-2 col-form-label">Number of days</label>
         <div class="col-sm-10">
           <input type="text" [(ngModel)]="leave.days" #days="ngModel" required name="days" class="form-control"
-            placeholder="" pattern="\d*">
+            placeholder="" pattern="\d*" maxlength="2">
           <div class="alert alert-danger" *ngIf="days.errors?.required && days.touched">
-            Days is required
+            No:of day(s) is required
           </div>
           <div class="alert alert-danger" *ngIf="days.errors?.pattern && days.touched">
-              Please enter a number
-            </div>
+            Please enter a number
+          </div>
         </div>
 
       </div>
       <div class="form-group row">
         <label for="leaveType" class="col-sm-2 col-form-label">Leave Type</label>
         <div class="col-sm-10">
-          <select class="custom-select form-control" name="leaveType" #leaveType="ngModel" [(ngModel)]="leave.leaveType"
-            (change)="onLeaveChange()">
+          <select class="custom-select form-control" name="leaveType" #leaveType="ngModel" [(ngModel)]="leave.leaveType">
             <option value="0" selected='true'>Earned Leave</option>
           </select>
         </div>

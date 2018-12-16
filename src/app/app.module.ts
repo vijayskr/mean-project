@@ -14,13 +14,16 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material';
+import { DateValidatorDirective } from './directives/date.validator.directive';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     DashboardComponent,
-    ApplyLeaveComponent
+    ApplyLeaveComponent,
+    DateValidatorDirective
   ],
   imports: [
     FormsModule,
@@ -29,6 +32,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     MatDatepickerModule,
     MatNativeDateModule,
     MatFormFieldModule,
+    MatInputModule,
     BrowserModule, RouterModule.forRoot(appRoutes)
   ],
   providers: [],
