@@ -62,7 +62,7 @@ export class LeaveService {
       );
   }
 
-  handleError(arg0: string, data: any): any {
+  handleError(arg0: string, data: any): any {console.log(arg0);
     throw new Error("Error postng data!!." + arg0);
   }
 }
