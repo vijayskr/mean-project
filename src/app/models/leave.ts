@@ -12,6 +12,6 @@ export class EmployeeLeave {
     leaveType: string;
     leaveReason: string;
     status: string;
-    appliedOn: Date;
-    managerComments: string;
+    appliedOn?: Date;
+    managerComments?: string;
 }

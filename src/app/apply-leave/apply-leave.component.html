@@ -16,7 +16,7 @@
           <!-- <input type="text" (ngModelChange)="onStartDateChanged($event)" [ngModel]="leave.startDate" #startDate="ngModel" required name="startDate" class="form-control"
             placeholder=" dd/mm/yyyy " > -->
           <mat-form-field>
-            <input readonly validateDateFormat matInput [matDatepicker]="startDatepicker" placeholder="DD/MM/YYYY" (ngModelChange)="onStartDateChanged($event)"
+            <input readonly validateDateFormat matInput [matDatepicker]="startDatepicker" placeholder="MM/DD/YYYY" (ngModelChange)="onStartDateChanged($event)"
               [ngModel]="leave.startDate" #startDate="ngModel" required name="startDate">
             <mat-datepicker-toggle matSuffix [for]="startDatepicker"></mat-datepicker-toggle>
             <mat-datepicker #startDatepicker></mat-datepicker>
@@ -39,7 +39,7 @@
           <!-- <input type="text" (ngModelChange)="onEndDateChanged($event)" [ngModel]="leave.endDate" #endDate="ngModel" required name="endDate" class="form-control"
             placeholder=" dd/mm/yyyy " pattern="\d{1,2}/\d{1,2}/\d{4}"> -->
           <mat-form-field>
-            <input readonly matInput [matDatepicker]="endDatepicker" placeholder="DD/MM/YYYY" (ngModelChange)="onEndDateChanged($event)"
+            <input readonly matInput [matDatepicker]="endDatepicker" placeholder="MM/DD/YYYY" (ngModelChange)="onEndDateChanged($event)"
               [ngModel]="leave.endDate" #endDate="ngModel" required name="endDate">
             <mat-datepicker-toggle matSuffix [for]="endDatepicker"></mat-datepicker-toggle>
             <mat-datepicker #endDatepicker></mat-datepicker>
