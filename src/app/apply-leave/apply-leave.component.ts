@@ -10,10 +10,13 @@ import { Router } from '@angular/router';
 })
 export class ApplyLeaveComponent implements OnInit {
   leave: EmployeeLeave = new EmployeeLeave();
+  error: boolean = false;
+  errorMsg: string = '';
 
   constructor(private leaveSvc: LeaveService, private router: Router) { }
 
   ngOnInit() {
+    this.clearError();
   }
   //OnStartDate Changed
   onStartDateChanged = (value: any) => {
@@ -48,11 +51,21 @@ export class ApplyLeaveComponent implements OnInit {
   }
   //Apply Leave
   applyLeave = (leave: EmployeeLeave) => {
+    this.clearError();
     this.leaveSvc.applyLeave(leave).subscribe(res => {
       console.log(res);
       this.router.navigateByUrl('/viewLeave');
     }, err => {
+      this.showError('Failed to save data!');
       console.log(err);
     });
+  }
+  clearError(){
+    this.error = false;
+    this.errorMsg = '';
+  }
+  showError(errorMsg: string) {
+    this.error = true;
+    this.errorMsg = errorMsg;
   }
 }

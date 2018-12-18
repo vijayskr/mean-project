@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { EmployeeLeave } from '../models/leave';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
+import { throwError } from 'rxjs';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -62,7 +63,7 @@ export class LeaveService {
       );
   }
 
-  handleError(arg0: string, data: any): any {console.log(arg0);
+  handleError(arg0: string, data: any): any {
     throw new Error("Error postng data!!." + arg0);
   }
 }

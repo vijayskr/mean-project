@@ -2,6 +2,12 @@
   <div class="col-lg-10 col-sm-4">
     <h2>Apply Leave</h2>
     <hr>
+    <div *ngIf="error" class="alert alert-danger alert-dismissible fade show" role="alert">
+        {{errorMsg}}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
     <form #applyLeaveForm="ngForm" (ngSubmit)="applyLeave(leave)">
 
       <div class="form-group row" [class.has-error]="startDate.invalid && startDate.touched" [class.has-success]="startDate.valid">
