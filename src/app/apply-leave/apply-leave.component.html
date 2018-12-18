@@ -16,7 +16,7 @@
           <!-- <input type="text" (ngModelChange)="onStartDateChanged($event)" [ngModel]="leave.startDate" #startDate="ngModel" required name="startDate" class="form-control"
             placeholder=" dd/mm/yyyy " > -->
           <mat-form-field>
-            <input readonly validateDateFormat matInput [matDatepicker]="startDatepicker" placeholder="MM/DD/YYYY" (ngModelChange)="onStartDateChanged($event)"
+            <input readonly validateDate="startDate" matInput [matDatepicker]="startDatepicker" placeholder="MM/DD/YYYY" (ngModelChange)="onStartDateChanged($event)"
               [ngModel]="leave.startDate" #startDate="ngModel" required name="startDate">
             <mat-datepicker-toggle matSuffix [for]="startDatepicker"></mat-datepicker-toggle>
             <mat-datepicker #startDatepicker></mat-datepicker>

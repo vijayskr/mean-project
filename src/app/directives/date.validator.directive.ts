@@ -2,10 +2,12 @@ import {NG_VALIDATORS, Validator, AbstractControl, ValidatorFn} from '@angular/f
 import { Directive, Input } from '@angular/core';
 
 @Directive({
-    selector: '[validateDateFormat]',
+    selector: '[validateDate]',
     providers: [{provide: NG_VALIDATORS, useExisting: DateValidatorDirective, multi: true}]
   })
   export class DateValidatorDirective implements Validator {
+    @Input('validateDate') dateInput: string;
+
     validate(control: AbstractControl): {[key: string]: any} | null {
         var today = new Date();
         var start: Date = new Date(control.value);

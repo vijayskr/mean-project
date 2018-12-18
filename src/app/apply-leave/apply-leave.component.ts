@@ -41,14 +41,6 @@ export class ApplyLeaveComponent implements OnInit {
 
     this.leave.days = Math.floor(diff/days);
   }
-
-  validateStartAndEndDates(startDate: string, endDate: string) {
-    let today = new Date();
-    var start: Date = new Date(startDate), 
-        end: Date = new Date(endDate); 
-    //if (start.valueOf() < today.valueOf())
-
-  }
   //Apply Leave
   applyLeave = (leave: EmployeeLeave) => {
     this.clearError();
