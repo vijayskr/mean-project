@@ -39,7 +39,7 @@ export class ApplyLeaveComponent implements OnInit {
         days = 1000*60*60*24;
     diff = end.valueOf() - start.valueOf();
 
-    this.leave.days = Math.floor(diff/days);
+    this.leave.days = Math.floor(diff/days) == 0? 1 : Math.floor(diff/days);
   }
   //Apply Leave
   applyLeave = (leave: EmployeeLeave) => {

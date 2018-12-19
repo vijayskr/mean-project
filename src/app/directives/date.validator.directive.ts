@@ -1,18 +1,40 @@
-import {NG_VALIDATORS, Validator, AbstractControl, ValidatorFn} from '@angular/forms';
+import { NG_VALIDATORS, Validator, AbstractControl, ValidatorFn } from '@angular/forms';
 import { Directive, Input } from '@angular/core';
 
 @Directive({
     selector: '[validateDate]',
-    providers: [{provide: NG_VALIDATORS, useExisting: DateValidatorDirective, multi: true}]
-  })
-  export class DateValidatorDirective implements Validator {
-    @Input('validateDate') dateInput: string;
+    providers: [{ provide: NG_VALIDATORS, useExisting: DateValidatorDirective, multi: true }]
+})
+export class DateValidatorDirective implements Validator {
+    @Input('validateDate') opt: string;
+    @Input('params') params: any;
 
-    validate(control: AbstractControl): {[key: string]: any} | null {
-        var today = new Date();
-        var start: Date = new Date(control.value);
-        if (start.valueOf() <= today.valueOf()) 
-            return {'startDateInvalid': {value: control.value}}
+    validate(control: AbstractControl): { [key: string]: any } | null {
+        if (this.params.key == 'startDate') {
+            let today = new Date();
+            let start: Date = new Date(control.value);
+            if (start.valueOf() <= today.valueOf())
+                return { 'startDateInvalid': { value: control.value } }
+
+            if (this.params.value != '') {
+                let end: Date = new Date(this.params.value);
+                if (end.valueOf() < start.valueOf())
+                    return { 'endDateIsLessThanStart': { value: control.value } }
+            }
+        }
+        else if (this.params.key == 'endDate') {
+            let today = new Date();
+            let end: Date = new Date(control.value);
+
+            if (end.valueOf() < today.valueOf())
+                return { 'endDateIsLessThanCurr': { value: control.value } }
+
+            if (this.params.value != '') {
+                let start: Date = new Date(this.params.value);
+                if (end.valueOf() < start.valueOf())
+                    return { 'endDateInvalid': { value: control.value } }
+            }
+        }
 
         return null;
     }
@@ -23,11 +45,11 @@ import { Directive, Input } from '@angular/core';
         let formatExp = new RegExp("\d{1,2}/\d{1,2}/\d{4}");
         let dtString = date.toLocaleDateString('en-US');
 
-         if (!formatExp.test(dtString)) return false;
+        if (!formatExp.test(dtString)) return false;
         return this.isValidDate(dtString);
     }
     isCorrectFormat() {
-        
+
     }
     //Getdate string
     getShortDate(dt: any) {
@@ -75,4 +97,4 @@ import { Directive, Input } from '@angular/core';
 
         return null;
     }
-  }
+}
