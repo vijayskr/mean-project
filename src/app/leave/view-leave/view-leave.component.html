@@ -1,0 +1,40 @@
+<div class="container">
+  <div class="col-lg-10 col-sm-4">
+    <h2>My Leave Applications Section</h2>
+    <hr>
+    <div class="row">
+      <button class="btn btn-primary" type="submit" (click)="applyLeave()">New Application</button>
+    </div>
+    <br>    
+    <div class="row" *ngIf="leave">
+      <table class="table">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">Leave ID</th>
+            <th scope="col">Number of days</th>
+            <th scope="col">Start Date</th>
+            <th scope="col">End Date</th>
+            <th scope="col">Leave Type</th>
+            <th scope="col">Status</th>
+            <th scope="col">Reason</th>
+            <th scope="col">Applied On</th>
+            <th scope="col">Manager Comments</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let leave of leave.appliedLeaves">
+            <td>{{leave._id}}</td>
+            <td>{{leave.days}}</td>
+            <td>{{leave.startDate}}</td>
+            <td>{{leave.endDate}}</td>
+            <td>{{leave.leaveType}}</td>
+            <td>{{leave.status}}</td>
+            <td>{{leave.leaveReason}}</td>
+            <td>{{leave.appliedOn}}</td>
+            <td>{{leave.mangerComments}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
