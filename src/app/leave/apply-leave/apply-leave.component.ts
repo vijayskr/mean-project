@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { EmployeeLeave } from '../models/leave';
-import { LeaveService } from '../services/leave.service';
+
 import { Router } from '@angular/router';
+import { EmployeeLeave } from 'src/app/models/leave';
+import { LeaveService } from 'src/app/services/leave.service';
 
 @Component({
   selector: 'apply-leave',
