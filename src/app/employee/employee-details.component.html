@@ -1,0 +1,47 @@
+<div class="container">
+  <h2>My Details Section</h2>
+  <div class="section">
+    <form>
+      <div class="form-group row">
+        <label for="employeeID" class="col-md-3 col-form-label">Employee ID</label>
+        <div class="col-md-3">
+          <input type="text" readonly class="form-control-plaintext" id="employeeID" value=": {{employee.EMP_ID}}">
+        </div>
+        <label for="dateJoined" class="col-md-3 col-form-label">Date Joined</label>
+        <div class="col-md-3">
+          <input type="text" readonly class="form-control-plaintext" id="dateJoined" value=": {{employee.EMP_DOJ | date:'shortDate'}}">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="fullName" class="col-md-3 col-form-label">Full Name</label>
+        <div class="col-md-3">
+          <input type="text" readonly class="form-control-plaintext" id="fullName" value=": {{employee.EMP_NAME}}">
+        </div>
+        <label for="department" class="col-md-3 col-form-label">Department</label>
+        <div class="col-md-3">
+          <input type="text" readonly class="form-control-plaintext" id="department" value=": {{employee.EMP_DEPT}}">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="emailID" class="col-md-3 col-form-label">Email Address</label>
+        <div class="col-md-3">
+          <input type="text" readonly class="form-control-plaintext" id="emailID" value=": {{employee.EMP_MAIL}}">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="mobileNo" class="col-md-3 col-form-label">Mobile Number</label>
+        <div class="col-md-3">
+          <input type="text" readonly class="form-control-plaintext" id="mobileNo" value=": {{employee.EMP_PHONE}}">
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-md-3"></div>
+        <label for="availableBalance" class="col-md-3 col-form-label">Available Leave Balance</label>
+        <div class="col-md-3">
+          <input type="text" readonly class="form-control-plaintext" id="availableBalance" value=": {{employee.LEAVE_BALANCE}}">
+        </div>
+        <div class="col-md-3"></div>
+      </div>
+    </form>
+  </div>
+</div>

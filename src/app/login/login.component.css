@@ -132,3 +132,10 @@ can be found in the LICENSE file at http://angular.io/license
     border: 1px solid #ccc;
   }
   */
+
+  .container {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

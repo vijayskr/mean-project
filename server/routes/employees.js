@@ -3,14 +3,12 @@ var router = express.Router();
 
 var Employee = require('../models/leave.server.model');
 
-//console.log(Employee)
-
 router.get('/', function (req, res, next) {
-  res.send('Initialized the new schema..');
+  res.send('Initialized the new schem..');
 });
 
 router.get('/viewLeave', function (req, res, next) {
-  var id = "5c241921ac5c7a91a5ffe93c";
+  var id = "5c241898ac5c7a91a5ffe8f9";
   //var query = Employee.findById(id);
 
   Employee.findById(id).exec(function (err, doc) {
@@ -35,17 +33,12 @@ router.post('/applyLeave', function (req, res) {
     status: 'Applied'
   };
 
-  var id = "5c241921ac5c7a91a5ffe93c";
+  var id = "5c241898ac5c7a91a5ffe8f9";
   //var query = Employee.findById(id);
-  //console.log(query)
 
   Employee.findById(id).exec(function (err, doc) {
     if (err) return res.status(500).json({ error: err });
     else {
-      console.log(id)
-      console.log(doc)
-      //doc.appliedLeaves = [];
-      //doc.appliedLeaves = 0;
       doc.appliedLeaves.push(leave);
       doc.leaveBalance = doc.leaveBalance - 1;
 

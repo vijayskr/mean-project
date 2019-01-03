@@ -5,18 +5,14 @@ import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { ManagerComponent } from './manager/manager.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { appRoutes } from './routerConfig';
-import { FormsModule } from '@angular/forms';
+import { EmployeeDetailsComponent } from './employee/employee-details.component';
 import { HttpClientModule } from '@angular/common/http';
-
-import { ApplyLeaveComponent } from './apply-leave/apply-leave.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatNativeDateModule } from '@angular/material';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material';
 import { DateValidatorDirective } from './directives/date.validator.directive';
 import { ViewLeaveComponent } from './leave/view-leave/view-leave.component';
+import { ApplyLeaveComponent } from './leave/apply-leave/apply-leave.component';
 
 @NgModule({
   declarations: [
@@ -24,18 +20,17 @@ import { ViewLeaveComponent } from './leave/view-leave/view-leave.component';
     LoginComponent,
     DashboardComponent,
     ApplyLeaveComponent,
+    EmployeeDetailsComponent,
     DateValidatorDirective,
-    ViewLeaveComponent
+    ViewLeaveComponent,
+    ManagerComponent
   ],
   imports: [
-    FormsModule,
+    BrowserModule, 
     HttpClientModule,
-    BrowserAnimationsModule,
-    MatDatepickerModule,
-    MatNativeDateModule,
-    MatFormFieldModule,
-    MatInputModule,
-    BrowserModule, RouterModule.forRoot(appRoutes)
+    ReactiveFormsModule,
+    FormsModule,
+    RouterModule.forRoot(appRoutes)
   ],
   providers: [],
   bootstrap: [AppComponent]
