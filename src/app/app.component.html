@@ -1,7 +1,13 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-  <a class="navbar-brand" href="#">Leave Mangement</a>
-</nav>
-<router-outlet></router-outlet>
-
-
+<div>
+  <h1>
+    Welcome to {{title}}!!
+  </h1>
+  <nav>
+    <a routerLink="login" routerLinkActive="active">Login</a>
+    <a routerLink="dashboard">Dashboard</a>
+    <a routerLink="applyLeave">Apply Leave</a>
+    <a routerLink="viewLeave">View Leave</a>
+  </nav>
+  <router-outlet></router-outlet>
+</div>
 
