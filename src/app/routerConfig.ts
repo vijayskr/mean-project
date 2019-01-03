@@ -4,6 +4,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { EmployeeDetailsComponent } from './employee/employee-details.component';
 import { ViewLeaveComponent } from './leave/view-leave/view-leave.component';
 import { ApplyLeaveComponent } from './leave/apply-leave/apply-leave.component';
+import { ManagerComponent } from './manager/manager.component';
 
 export const appRoutes: Routes = [
   {
@@ -28,8 +29,12 @@ export const appRoutes: Routes = [
 },
   {
     path: 'mymgrsec/:id',
-    component: DashboardComponent
+    component: ManagerComponent
   },
+  {
+    path: 'mymanager',
+    component: ManagerComponent
+    },
   {
     path: 'myleave/:id',
     component: DashboardComponent
