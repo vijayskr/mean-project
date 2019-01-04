@@ -8,7 +8,7 @@ router.get('/', function (req, res, next) {
 });
 
 router.get('/viewLeave', function (req, res, next) {
-  var id = "5c129115e5c51e3d6c2bb3ad";
+  var id = "5c241898ac5c7a91a5ffe8f9";
   //var query = Employee.findById(id);
 
   Employee.findById(id).exec(function (err, doc) {
@@ -33,7 +33,7 @@ router.post('/applyLeave', function (req, res) {
     status: 'Applied'
   };
 
-  var id = "5c129115e5c51e3d6c2bb3ad";
+  var id = "5c241898ac5c7a91a5ffe8f9";
   //var query = Employee.findById(id);
 
   Employee.findById(id).exec(function (err, doc) {
