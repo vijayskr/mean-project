@@ -22,7 +22,7 @@ export class ViewLeaveComponent implements OnInit {
     this.router.navigateByUrl('/applyLeave');
   }
 
-  //Apply Leave
+  // Apply Leave
   viewLeave = (id: string) => {
     this.leaveSvc.viewLeave(id).subscribe(res => {
       this.leave = res;
