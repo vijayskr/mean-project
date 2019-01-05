@@ -26,7 +26,7 @@ import { ApplyLeaveComponent } from './leave/apply-leave/apply-leave.component';
     ManagerComponent
   ],
   imports: [
-    BrowserModule, 
+    BrowserModule,
     HttpClientModule,
     ReactiveFormsModule,
     FormsModule,

@@ -23,8 +23,6 @@ export class ViewLeaveComponent implements OnInit {
   applyLeave() {
     this.router.navigateByUrl('/applyLeave');
   }
-
-  //View Leave
   viewLeave = (id: string) => {
     this.leaveSvc.viewLeave(id).subscribe((res:Employee) => {
       this.employee = res;

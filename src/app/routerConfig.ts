@@ -7,46 +7,11 @@ import { ApplyLeaveComponent } from './leave/apply-leave/apply-leave.component';
 import { ManagerComponent } from './manager/manager.component';
 
 export const appRoutes: Routes = [
-  {
-    path: '',
-    redirectTo: '/login',
-    pathMatch: 'full'
-  },
-  {
-    path: 'login',
-    component: LoginComponent
-  },
-  {
-    path: 'dashboard/:id',
-    component: DashboardComponent
-  },
-  {
-    path: 'mysection/:id',
-    component: DashboardComponent
-  },
-  { path: 'myDetails/:id', 
-  component: EmployeeDetailsComponent  
-},
-  {
-    path: 'mymgrsec/:id',
-    component: ManagerComponent
-  },
-  {
-    path: 'mymanager',
-    component: ManagerComponent
-    },
-  {
-    path: 'myleave/:id',
-    component: DashboardComponent
-  },
-  {
-    path: 'myrptleave/:id',
-    component: DashboardComponent
-  },
-  { path: 'applyLeave',
-    component: ApplyLeaveComponent
-  },
-  { path: 'viewLeave',
-    component: ViewLeaveComponent
-  }
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
+  { path: 'login', component: LoginComponent },
+  { path: 'dashboard/:id', component: DashboardComponent },
+  { path: 'mysection/:id', component: EmployeeDetailsComponent },
+  { path: 'mymgrsec/:id', component: ManagerComponent },
+  { path: 'myleave/:id', component: ApplyLeaveComponent },
+  { path: 'myrptleave/:id', component: ViewLeaveComponent }
 ];
