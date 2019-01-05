@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { EmployeeLeave } from '../models/leave';
+import { HttpClient, HttpHeaders, HttpResponse, HttpErrorResponse } from '@angular/common/http';
+import { Leave } from '../models/leave';
 import { Observable, of } from 'rxjs';
-import { catchError, retry } from 'rxjs/operators';
-import { throwError } from 'rxjs';
+import { catchError, tap, map } from 'rxjs/operators';
+import { Employee } from '../models/employee';
+import { AppError } from '../models/appError';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -16,54 +17,32 @@ const httpOptions = {
 })
 export class LeaveService {
 
-  url: string = "http://localhost:8989/employee";
+  url: string = "http://localhost:8989/employees";
   
   constructor(public http: HttpClient) {
-
   }
-  // getUsers() {
-  //   let url = this.protectedUrl + "/users?token=" + localStorage.getItem("token");
-  //   return this.http.get<User[]>(url);
-  // }
 
-  // deleteUser(user: User): Observable<any> {
-  //   return this.http.post<any>(this.protectedUrl + "/usersDelete?token=" + localStorage.getItem("token"), user, httpOptions)
-  //     .pipe(
-  //       //catchError(val => of(`I caught: ${val}`))
-  //       catchError(err => this.handleError(err, user))
-  //     );
-  // }
-
-  // signUp(user: User): Observable<any> {
-  //   return this.http.post<any>(this.url + '/signup', user, httpOptions)
-  //     .pipe(
-  //       //catchError(val => of(`I caught: ${val}`))
-  //       catchError(err => this.handleError(err, user))
-  //     );
-  // }
-
-  // authenticate(user: User): Observable<any> {
-  //   return this.http.post<any>(this.url + '/authenticate', user, httpOptions)
-  //     .pipe(
-  //       //catchError(val => of(`I caught: ${val}`))
-  //       catchError(err => this.handleError(err, user))
-  //     );
-  // }
-  applyLeave(leave: EmployeeLeave): Observable<any> {
+  applyLeave(leave: Leave): Observable<any> {
     return this.http.post<any>(this.url + '/applyLeave', leave, httpOptions)
       .pipe(
-        catchError(err => this.handleError(err, leave))
+        catchError(err => this.handleError(err))
       );
   }
 
-  viewLeave(id: String): Observable<any> {
-    return this.http.get<any>(this.url + '/viewLeave')
+  viewLeave(id: String): Observable<Employee | AppError> {
+    let emp = new Employee();
+
+    return this.http.get<Employee>(this.url + '/viewLeave')
       .pipe(
-        catchError(err => this.handleError(err, id))
+        catchError(err => this.handleError(err))
       );
   }
 
-  handleError(arg0: string, data: any): any {
-    throw new Error("Error postng data!!." + arg0);
+  private handleError(err: HttpErrorResponse) : Observable<AppError>{
+    let dataError = new AppError();
+    dataError.errorNumber=100;
+    dataError.message = err.message;
+    dataError.friendlyMessage = "An error occured while processing the request!!";
+    return of(dataError);
   }
 }

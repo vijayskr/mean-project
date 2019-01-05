@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { Router } from '@angular/router';
-import { EmployeeLeave } from 'src/app/models/leave';
+import { Leave } from 'src/app/models/leave';
 import { LeaveService } from 'src/app/services/leave.service';
 
 @Component({
@@ -10,7 +10,7 @@ import { LeaveService } from 'src/app/services/leave.service';
   styleUrls: ['./apply-leave.component.css']
 })
 export class ApplyLeaveComponent implements OnInit {
-  leave: EmployeeLeave = new EmployeeLeave();
+  leave: Leave = new Leave();
   error: boolean = false;
   errorMsg: string = '';
 
@@ -18,10 +18,14 @@ export class ApplyLeaveComponent implements OnInit {
 
   ngOnInit() {
     this.clearError();
+    //Hard coding the user id
+    this.leave.empId = 1;
+    //TODO: Get loggedIn user id.
   }
   //OnStartDate Changed
   onStartDateChanged = (value: any) => {
     this.leave.startDate = value;
+    
     if (this.leave.endDate != undefined)
       this.calculateNumberOfDays(this.leave.startDate, this.leave.endDate);
   }
@@ -33,25 +37,55 @@ export class ApplyLeaveComponent implements OnInit {
   }
   
   
-  calculateNumberOfDays(startDate: string, endDate: string) {
+  calculateNumberOfDays(startDate: Date, endDate: Date) {
     var start: Date = new Date(startDate), 
         end: Date = new Date(endDate), 
         diff = 0, 
         days = 1000*60*60*24;
     diff = end.valueOf() - start.valueOf();
 
-    this.leave.days = Math.floor(diff/days) == 0? 1 : Math.floor(diff/days);
+    this.leave.noOfDays = Math.floor(diff/days) == 0? 1 : Math.floor(diff/days);
   }
   //Apply Leave
-  applyLeave = (leave: EmployeeLeave) => {
-    this.clearError();
+  applyLeave = (leave: Leave) => {
+  this.clearError();
+  if (!this.validateStartAndEndDates(leave.startDate, leave.endDate))
+    return false;
+
     this.leaveSvc.applyLeave(leave).subscribe(res => {
-      console.log(res);
       this.router.navigateByUrl('/viewLeave');
     }, err => {
       this.showError('Failed to save data!');
       console.log(err);
     });
+  }
+  validateStartAndEndDates(startDt: Date, endDt: Date) {
+    let start: Date = new Date(startDt);
+    let end: Date = new Date(endDt);
+
+    let dt =  new Date();
+    let yr = dt.getFullYear();
+    let month = (dt.getMonth()+1) < 10 ? '0' + (dt.getMonth()+1): (dt.getMonth() + 1);
+    let day = dt.getDate() < 10? '0' + dt.getDate(): dt.getDate();
+
+    let today = new Date(yr+'-'+month+'-'+day);
+
+    console.log('start',startDt,'end',endDt,'today',yr+'-'+month+'-'+day);
+
+    var msDateStart = Date.UTC(start.getFullYear(), start.getMonth()+1, start.getDate());
+    var msDateEnd = Date.UTC(end.getFullYear(), end.getMonth()+1, end.getDate());
+    var msToday = Date.UTC(today.getFullYear(), today.getMonth()+1, today.getDate());
+
+    if (msDateEnd < msDateStart) {
+      this.showError('End date cannot be less than start date!');
+      return false;
+    }
+      
+    if (msDateStart < msToday) {
+      this.showError('Start date cannot be a past date!');
+      return false;
+    }
+    return true;
   }
   clearError(){
     this.error = false;
