@@ -21,6 +21,7 @@ export class ApplyLeaveComponent implements OnInit {
     //Hard coding the user id
     this.leave.empId = 1;
     //TODO: Get loggedIn user id.
+    this.leave.leaveType = 'EL';
   }
   //OnStartDate Changed
   onStartDateChanged = (value: any) => {
@@ -42,9 +43,16 @@ export class ApplyLeaveComponent implements OnInit {
         end: Date = new Date(endDate), 
         diff = 0, 
         days = 1000*60*60*24;
+
+
     diff = end.valueOf() - start.valueOf();
 
-    this.leave.noOfDays = Math.floor(diff/days) == 0? 1 : Math.floor(diff/days);
+    if (diff == 0) {
+      this.leave.noOfDays = 1;
+      return;
+    }
+
+    this.leave.noOfDays = Math.floor(diff/days) + 1;
   }
   //Apply Leave
   applyLeave = (leave: Leave) => {
@@ -94,5 +102,8 @@ export class ApplyLeaveComponent implements OnInit {
   showError(errorMsg: string) {
     this.error = true;
     this.errorMsg = errorMsg;
+  }
+  cancel = () => {
+    this.router.navigateByUrl('/viewLeave');
   }
 }
