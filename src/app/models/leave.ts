@@ -1,7 +1,7 @@
 export class Leave {
     id: string;
     fullName: string;
-    appliedLeaves: [EmployeeLeave]
+    appliedLeaves: [EmployeeLeave];
 }
 
 export class EmployeeLeave {
