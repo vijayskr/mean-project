@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { LeaveService } from 'src/app/services/leave.service';
 import { Leave } from 'src/app/models/leave';
+import { Employee } from 'src/app/models/employee';
+import { AppError } from 'src/app/models/appError';
 
 @Component({
   selector: 'view-leave',
@@ -10,7 +12,7 @@ import { Leave } from 'src/app/models/leave';
 })
 export class ViewLeaveComponent implements OnInit {
 
-  leave: Leave = new Leave();
+  employee: Employee = new Employee();
 
   constructor(private router: Router, private leaveSvc: LeaveService) { }
 
@@ -21,12 +23,10 @@ export class ViewLeaveComponent implements OnInit {
   applyLeave() {
     this.router.navigateByUrl('/applyLeave');
   }
-
-  // Apply Leave
   viewLeave = (id: string) => {
-    this.leaveSvc.viewLeave(id).subscribe(res => {
-      this.leave = res;
-    }, err => {
+    this.leaveSvc.viewLeave(id).subscribe((res:Employee) => {
+      this.employee = res;
+    }, (err: AppError) => {
       console.log(err);
     });
   }

@@ -11,16 +11,24 @@ export class DateValidatorDirective implements Validator {
 
     validate(control: AbstractControl): { [key: string]: any } | null {
         if (this.params.key == 'startDate') {
-            let today = new Date();
-            let start: Date = new Date(control.value);
-            if (start.valueOf() <= today.valueOf())
-                return { 'startDateInvalid': { value: control.value } }
+            console.log(this.params)
+            // let dt = new Date();
+            // let today = dt.toLocaleDateString();
+            // let start: Date = new Date(control.value);
+            // start.setMonth(start.getMonth() + 1);
+            // let dt2 = start.toLocaleDateString();
 
-            if (this.params.value != '') {
-                let end: Date = new Date(this.params.value);
-                if (end.valueOf() < start.valueOf())
-                    return { 'endDateIsLessThanStart': { value: control.value } }
-            }
+            
+
+            //console.log('dt', dt, 'dt2', dt2)
+            // if (start.valueOf() <= today.valueOf())
+            //     return { 'startDateInvalid': { value: control.value } }
+
+            // if (this.params.value != '') {
+            //     let end: Date = new Date(this.params.value);
+            //     if (end.valueOf() < start.valueOf())
+            //         return { 'endDateIsLessThanStart': { value: control.value } }
+            // }
         }
         else if (this.params.key == 'endDate') {
             let today = new Date();

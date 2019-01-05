@@ -5,8 +5,8 @@
     <div class="row">
       <button class="btn btn-primary" type="submit" (click)="applyLeave()">New Application</button>
     </div>
-    <br>  
-    <div class="row" *ngIf="leave">
+    <br>
+    <div class="row" *ngIf="employee">
       <table class="table">
         <thead class="thead-dark">
           <tr>
@@ -22,16 +22,16 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let leave of leave.appliedLeaves">
-            <td>{{leave._id}}</td>
-            <td>{{leave.days}}</td>
-            <td>{{leave.startDate}}</td>
-            <td>{{leave.endDate}}</td>
-            <td>{{leave.leaveType}}</td>
-            <td>{{leave.status}}</td>
-            <td>{{leave.leaveReason}}</td>
-            <td>{{leave.appliedOn}}</td>
-            <td>{{leave.mangerComments}}</td>
+          <tr *ngFor="let emp of employee.appliedLeaves">
+            <td>{{emp._id}}</td>
+            <td>{{emp.noOfDays}}</td>
+            <td>{{emp.startDate | date:'shortDate'}}</td>
+            <td>{{emp.endDate | date:'shortDate'}}</td>
+            <td>{{emp.leaveType}}</td>
+            <td>{{emp.leaveStatus}}</td>
+            <td>{{emp.leaveReason}}</td>
+            <td>{{emp.appliedOn | date:'shortDate'}}</td>
+            <td>{{emp.mangerComments}}</td>
           </tr>
         </tbody>
       </table>
