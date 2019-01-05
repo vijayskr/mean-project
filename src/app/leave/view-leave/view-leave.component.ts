@@ -17,7 +17,9 @@ export class ViewLeaveComponent implements OnInit {
   constructor(private router: Router, private leaveSvc: LeaveService) { }
 
   ngOnInit() {
-    this.viewLeave('');
+    let empId = localStorage.getItem("empId");
+    if (empId != undefined)
+      this.viewLeave(empId);
   }
 
   applyLeave() {

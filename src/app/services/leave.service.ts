@@ -32,7 +32,7 @@ export class LeaveService {
   viewLeave(id: String): Observable<Employee | AppError> {
     let emp = new Employee();
 
-    return this.http.get<Employee>(this.url + '/viewLeave')
+    return this.http.get<Employee>(this.url + `/viewLeave/${id}`)
       .pipe(
         catchError(err => this.handleError(err))
       );

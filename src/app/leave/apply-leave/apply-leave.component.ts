@@ -19,9 +19,7 @@ export class ApplyLeaveComponent implements OnInit {
 
   ngOnInit() {
     this.clearError();
-    //Hard coding the user id
-    this.leave.empId = 3;
-    //TODO: Get loggedIn user id.
+    this.leave.empId =  +localStorage.getItem("empId");
     this.leave.leaveType = 'EL';
   }
   //OnStartDate Changed
