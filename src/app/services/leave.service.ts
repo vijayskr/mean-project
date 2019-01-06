@@ -32,16 +32,21 @@ export class LeaveService {
   viewLeave(id: String): Observable<Employee | AppError> {
     let emp = new Employee();
 
-    return this.http.get<Employee>(this.url + '/viewLeave')
+    return this.http.get<Employee>(this.url + `/viewLeave/${id}`)
       .pipe(
         catchError(err => this.handleError(err))
       );
   }
 
   private handleError(err: HttpErrorResponse) : Observable<AppError>{
+
+    console.log()
+
     let dataError = new AppError();
     dataError.errorNumber=100;
-    dataError.message = err.message;
+    //Capture user defined error if any
+    dataError.message = err.error != undefined? err.error.error : err.message;
+    console.log(err.message);
     dataError.friendlyMessage = "An error occured while processing the request!!";
     return of(dataError);
   }

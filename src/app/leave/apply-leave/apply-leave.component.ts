@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Leave } from 'src/app/models/leave';
 import { LeaveService } from 'src/app/services/leave.service';
+import { AppError } from 'src/app/models/appError';
 
 @Component({
   selector: 'apply-leave',
@@ -18,9 +19,7 @@ export class ApplyLeaveComponent implements OnInit {
 
   ngOnInit() {
     this.clearError();
-    //Hard coding the user id
-    this.leave.empId = 1;
-    //TODO: Get loggedIn user id.
+    this.leave.empId =  +localStorage.getItem("empId");
     this.leave.leaveType = 'EL';
   }
   //OnStartDate Changed
@@ -61,6 +60,10 @@ export class ApplyLeaveComponent implements OnInit {
     return false;
 
     this.leaveSvc.applyLeave(leave).subscribe(res => {
+      if (res instanceof AppError) {
+        this.showError(res.message);
+        return;
+      }
       this.router.navigateByUrl('/viewLeave');
     }, err => {
       this.showError('Failed to save data!');

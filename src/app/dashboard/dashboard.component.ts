@@ -32,6 +32,6 @@ export class DashboardComponent implements OnInit {
   }
 
   toMyLeave() {
-    this.router.navigate([`/myleave/${this.myID}`]);
+    this.router.navigateByUrl('/viewLeave');
   }
 }
