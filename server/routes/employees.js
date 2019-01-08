@@ -10,6 +10,18 @@ router.get('/', function (req, res, next) {
   });
 });
 
+
+router.get('/getmanagerdetails', function (req, res, next) {
+  var id = 1000;
+  Employee.findOne({ empId: id }).exec(function (err, doc) {
+    if (err) return res.status(500).json({ error: err });
+    else {
+      console.log(doc);
+      return res.status(200).json(doc);
+    }
+  });
+});
+
 router.get('/viewLeave', function (req, res, next) {
   var id = 1;
   //var query = Employee.findById(id);
