@@ -36,6 +36,10 @@ mongoose.connect('mongodb://localhost:27017/leaveManagement', function (error) {
     }
 });
 
+mongoose.connection.on('connected', function(){
+    console.log("connected to DB succsssfully");
+});
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hjs');

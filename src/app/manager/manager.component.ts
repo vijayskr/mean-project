@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
+import { EmployeeService } from '../services/employee.service';
+import { Employee } from 'src/app/models/employee';
 
 @Component({
   selector: 'app-manager',
@@ -8,12 +10,16 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class ManagerComponent implements OnInit {
 
-  constructor(private route: ActivatedRoute, private router: Router) { }
+  employee: Employee;
+  empId: number;
+
+  constructor(private httpSvc: EmployeeService, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit() {
-    console.log(typeof (this.route.snapshot.params['id']) == "undefined");
-    // if (typeof (this.route.snapshot.params['id']) == "undefined")
-      // this.router.navigate(['/dashboard']);
+    this.empId = this.route.snapshot.params['id'];
+    this.httpSvc.getMgr(this.empId).subscribe(
+      emps => this.employee = emps.find(e => +e.EMP_ID === this.empId)
+    );
   }
 
 }
