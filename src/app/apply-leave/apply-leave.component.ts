@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { EmployeeLeave } from '../models/leave';
+import { Leave } from '../models/leave';
 import { LeaveService } from '../services/leave.service';
 import { Router } from '@angular/router';
 
@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./apply-leave.component.css']
 })
 export class ApplyLeaveComponent implements OnInit {
-  leave: EmployeeLeave = new EmployeeLeave();
+  leave: Leave = new Leave();
   error: boolean = false;
   errorMsg: string = '';
 
@@ -30,19 +30,19 @@ export class ApplyLeaveComponent implements OnInit {
     if (this.leave.startDate != undefined)
       this.calculateNumberOfDays(this.leave.startDate, this.leave.endDate);
   }
-  
-  
+
+
   calculateNumberOfDays(startDate: string, endDate: string) {
-    var start: Date = new Date(startDate), 
-        end: Date = new Date(endDate), 
-        diff = 0, 
+    var start: Date = new Date(startDate),
+        end: Date = new Date(endDate),
+        diff = 0,
         days = 1000*60*60*24;
     diff = end.valueOf() - start.valueOf();
 
     this.leave.days = Math.floor(diff/days) == 0? 1 : Math.floor(diff/days);
   }
   //Apply Leave
-  applyLeave = (leave: EmployeeLeave) => {
+  applyLeave = (leave: Leave) => {
     this.clearError();
     this.leaveSvc.applyLeave(leave).subscribe(res => {
       console.log(res);
